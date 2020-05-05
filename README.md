@@ -93,11 +93,12 @@ For a demo Pandas dataframe:
 >Target | Diagnosis of heart disease (1 = true; 0 = false) | Classification | integer
 >is_male | Whether a person is male (true or false) | Numerical | bool
 
-We may INTERACTIVELY build the features base on the dataframe.
+We may INTERACTIVELY build the features based on the dataframe.
 
 Inline-style: 
 ![builder](https://github.com/MRYingLEE/DeepTime-Deep-Learning-Framework-for-Time-Series-Forecasting/blob/master/Features-Builder/builder.JPG "builder")
 
+The builder will interactively generate some source code for us:
 ```
 ["input_features.append(numeric_column('age',normalizer_fn=lambda by_train: (tf.cast(by_train,tf.float32) -29.0)/(77.0-29.0)))",
  "input_features.append(numeric_column('trestbps',normalizer_fn=lambda by_train: (tf.cast(by_train,tf.float32) -94.0)/(200.0-94.0)))",
@@ -109,3 +110,5 @@ Inline-style:
  "label_features.append(categorical_identitys('target',[0,1]))",
  "input_features.append(numeric_column('is_male'))"]
 ```
+
+You may use the code directly or modify it further.
