@@ -73,3 +73,39 @@ Is this a whole pipeline framework? No, I won't cover data preprocessing, which 
 
 ## Interactive Features Builder
 
+For a demo Pandas dataframe:
+
+>Column| Description| Feature Type | Data Type
+>------------|--------------------|----------------------|-----------------
+>Age | Age in years | Numerical | integer
+>Sex | (1 = male; 0 = female) | Categorical | integer
+>CP | Chest pain type (0, 1, 2, 3, 4) | Categorical | integer
+>Trestbpd | Resting blood pressure (in mm Hg on admission to the hospital) | Numerical | integer
+>Chol | Serum cholestoral in mg/dl | Numerical | integer
+>FBS | (fasting blood sugar > 120 mg/dl) (1 = true; 0 = false) | Categorical | integer
+>RestECG | Resting electrocardiographic results (0, 1, 2) | Categorical | integer
+>Thalach | Maximum heart rate achieved | Numerical | integer
+>Exang | Exercise induced angina (1 = yes; 0 = no) | Categorical | integer
+>Oldpeak | ST depression induced by exercise relative to rest | Numerical | float
+>Slope | The slope of the peak exercise ST segment | Numerical | integer
+>CA | Number of major vessels (0-3) colored by flourosopy | Numerical | integer
+>Thal | 3 = normal; 6 = fixed defect; 7 = reversable defect | Categorical | string
+>Target | Diagnosis of heart disease (1 = true; 0 = false) | Classification | integer
+>is_male | Whether a person is male (true or false) | Numerical | bool
+
+We may INTERACTIVELY build the features base on the dataframe.
+
+Inline-style: 
+![builder](https://github.com/MRYingLEE/DeepTime-Deep-Learning-Framework-for-Time-Series-Forecasting/blob/master/Features-Builder/builder.JPG "builder")
+
+```
+["input_features.append(numeric_column('age',normalizer_fn=lambda by_train: (tf.cast(by_train,tf.float32) -29.0)/(77.0-29.0)))",
+ "input_features.append(numeric_column('trestbps',normalizer_fn=lambda by_train: (tf.cast(by_train,tf.float32) -94.0)/(200.0-94.0)))",
+ "input_features.append(numeric_column('chol',normalizer_fn=lambda by_train: (tf.cast(by_train,tf.float32) -131.0)/(564.0-131.0)))",
+ "input_features.append(numeric_column('thalach',normalizer_fn=lambda by_train: (tf.cast(by_train,tf.float32) -71.0)/(202.0-71.0)))",
+ "input_features.append(numeric_column('oldpeak',normalizer_fn=lambda by_train: (by_train -0.0)/(6.2-0.0)))",
+ "input_features.append(categorical_identitys('slope',[3,2,1]))",
+ "input_features.append(categorical_identitys('ca',[0,3,2,1]))",
+ "label_features.append(categorical_identitys('target',[0,1]))",
+ "input_features.append(numeric_column('is_male'))"]
+```
