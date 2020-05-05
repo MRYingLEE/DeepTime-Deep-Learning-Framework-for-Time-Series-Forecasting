@@ -73,6 +73,9 @@ Is this a whole pipeline framework? No, I won't cover data preprocessing, which 
 
 ## Interactive Features Builder
 
+(I published an introduction at:
+https://medium.com/@mr.ying.lee/interactive-features-builder-in-jupyter-notebook-for-tensorflow-2-2322575733c9).
+
 For a demo Pandas dataframe:
 
 >Column| Description| Feature Type | Data Type
