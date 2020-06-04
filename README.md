@@ -27,8 +27,6 @@ def get_configs():
   default_inputs=['cnt','temp','hum','windspeed']  # The default features list for inputs
   default_labels=['cnt']  # The default features list for labels
   default_future=list(set(cols_to_keep)-set(default_inputs))
-    
-  dataframe.head()
 
   dataframe_train, dataframe_test = train_test_split(dataframe, test_size=0.2)
   dataframe_train, dataframe_val = train_test_split(dataframe_train, test_size=0.2)
@@ -45,7 +43,7 @@ def get_configs():
   # The order of the variables is very important. 
 ```
 
-## 2. To preprocess data by mouse
+## 2. To normalize data by mouse
 ![features](https://github.com/MRYingLEE/DeepTime-Deep-Learning-Framework-for-Time-Series-Forecasting/blob/master/images/seq2seq_features.JPG "features")
 
 ## 3. To define sequence by mouse
@@ -87,33 +85,14 @@ Time series (TS) data is focused. Technically 2 kinds of time-series data are su
 
 Logically, time-series data has the 3D shape of (n_ series, n_timestamp, n_features).
 
-Usually, time-series data can be categorized as:
-## Tabular Data Source
-Technically, Pandas (2D) with chunks (series, the 3rd D ).
-
-Pros: Intuitive, suitable to complicated situation
-
-Cons: Not efficient
-
-## (Anonymous) 3D Array
-Technically, NumPy array of (N_ series, n_timestamp, n_features).
-
-Pros: Efficient and Neutral to NN
-
-Cons: Not intuitive, suitable to simple situation
-
-These 2 kinds of data can be converted to each other easily.
-
-## Different Usages for 2 kinds of TS data 
-
-Some AutoML tools support tabular data source, some support 3d array with shuffle=False. 
-Some neurual network scripts support tabular one, somes do 3d one.
-
 ## Some related questions:
 Is this an autoML platform? NO!<br>
-Are there any built-in models? Yes, but only for reference.<br>
+Are there any built-in models? Yes, but 1 vanilla LSTM and 1 Seq2Seq model was built-in only for reference.<br>
 Are there hyperparamerters tuning built in? Maybe, but not yet.<br>
-
+Can I define a new model? Yes, you may call 
+```
+def train_by_model(self,model_fn, epochs=1)
+```
 # Which?
 Is this a whole pipeline framework? No, I won't cover data preprocessing, which can be covered by Time-series-Preprocessing-Studio-in-Jupyter (https://github.com/MRYingLEE/Time-series-Preprocessing-Studio-in-Jupyter ）.
 
