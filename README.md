@@ -152,6 +152,6 @@ You may use the code directly or modify it further.
 # Credit
 The built-in models are modified from the following:
 
-[Alessandro Angioi] Time Series Forecasting with an LSTM Encoder/Decoder in TensorFlow 2.0(https://www.angioi.com/time-series-encoder-decoder-tensorflow/)
+[Alessandro Angioi] Time Series Forecasting with an LSTM Encoder/Decoder in TensorFlow 2.0(https://www.angioi.com/time-series-encoder-decoder-tensorflow/)<br>
 [Tensorflow Team] Time series forecasting (https://www.tensorflow.org/tutorials/structured_data/time_series)
 
