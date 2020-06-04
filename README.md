@@ -81,9 +81,9 @@ I am trying to divide the whole workflow as the different steps and for differen
 
 This is an INTERACTIVE deep learning framework for time series forecasting. It uses Tensorflow 2+tf.karas.
 So, no pure statistics model was covered. Technically I use deep learning model, maybe along with some statistics model as part.
-Time series (TS) data is focused. Technically 2 kinds of time-series data are supported.
+Time series (TS) data is focused. 
 
-Logically, time-series data has the 3D shape of (n_ series, n_timestamp, n_features).
+Logically, time-series data has the 3D shape of (n_series, n_timestamp, n_features).
 
 ## Some related questions:
 Is this an autoML platform? NO!<br>
