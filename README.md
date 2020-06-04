@@ -1,6 +1,59 @@
 # DeepTime-Deep-Learning-Framework-for-Time-Series-Forecasting
 This is an INTERACTIVE deep learning framework for time series forecasting. It uses Tensorflow 2+tf.karas.
 
+# A quick demo
+
+## 1. To define your problem by code
+```
+def get_configs():
+  if not path.exists('bike_data/hour.csv'):
+    ! wget https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip
+    ! unzip Bike-Sharing-Dataset.zip -d bike_data
+
+  df = pd.read_csv('bike_data/hour.csv', index_col='instant')
+  cols_to_keep = [       
+    'cnt',
+    'temp',
+    'hum',
+    'windspeed',
+    'yr',
+    'mnth', 
+    'hr', 
+    'holiday', 
+    'weekday', 
+    'workingday'
+  ]
+  dataframe = df[cols_to_keep]
+  default_inputs=['cnt','temp','hum','windspeed']  # The default features list for inputs
+  default_labels=['cnt']  # The default features list for labels
+  default_future=list(set(cols_to_keep)-set(default_inputs))
+    
+  dataframe.head()
+
+  dataframe_train, dataframe_test = train_test_split(dataframe, test_size=0.2)
+  dataframe_train, dataframe_val = train_test_split(dataframe_train, test_size=0.2)
+  print(len(dataframe_train), 'train examples')
+  print(len(dataframe_val), 'validation examples')
+
+  past_history = 24 * 7 * 3 
+  future_target = 24 * 5
+  categories_limit=20
+  batch_size = 32
+  single_step=False
+
+  return dataframe, dataframe_train, dataframe_val, dataframe_test,default_inputs,default_labels,default_future, past_history, future_target,categories_limit, batch_size,single_step
+  # The order of the variables is very important. 
+```
+
+## 2. To preprocess data by mouse
+![features](https://github.com/MRYingLEE/DeepTime-Deep-Learning-Framework-for-Time-Series-Forecasting/blob/master/images/seq2seq_features.JPG "features")
+
+## 3. To define sequence by mouse
+![periods](https://github.com/MRYingLEE/DeepTime-Deep-Learning-Framework-for-Time-Series-Forecasting/blob/master/images/seq2seq_periods.JPG "periods")
+
+# 4. To train
+![training](https://github.com/MRYingLEE/DeepTime-Deep-Learning-Framework-for-Time-Series-Forecasting/blob/master/images/seq2seq_training.JPG "training")
+
 # Why?
 
 I have done a few time series forecasting projects. I hate I have to start from scratch every time, which always take a few hours. I want to focus my problem instead of typing and copying. And I want a framework can interactively assist me to go through the whole procedure smoothly. So that I can start quickly and end successfully. 
