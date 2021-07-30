@@ -1,6 +1,41 @@
 # DeepTime-Deep-Learning-Framework-for-Time-Series-Forecasting
 This is an INTERACTIVE deep learning framework for time series forecasting. It uses Tensorflow 2+tf.karas.
 
+# Roadmap <July 2021>
+More than 1 year passed. I plan to upgrade the deeptime greatly. 
+## TFX (Tensorflow Extended) will be used, besides Tensorflow
+
+## More advanced model will be supported
+So far, the model of Informer, a variant of Transformer, is my preference.
+
+## Some critical choice for the next version
+
+### Tensorflow vs Pytorch
+As a practioner instead of a researcher, I will continue to use Tensorflow for it is easy to put Tensorflow models into production due to its bigger ecosystem.
+
+### Tensorflow vs Keras
+I will continue to use Keras as an extension of Tensorflow.
+
+###  Keras (Sequential or Functional API vs Subclassing)
+There is a good comparion, What are Symbolic and Imperative APIs in TensorFlow 2.0? (
+https://blog.tensorflow.org/2019/01/what-are-symbolic-and-imperative-apis.html).
+
+```
+TensorFlow 2.0 supports both of these styles out of the box, so you can choose the right level of abstraction (and complexity) for your project.
+If your goal is ease of use, low conceptual overhead, and you like to think about your models as graphs of layers: use the Keras Sequential or Functional API (like plugging together LEGO bricks) and the built-in training loop. This is the right way to go for most problems.
+If you like to think about your models as an object-oriented Python/Numpy developer, and you prioritize flexibility and hackability, Keras Subclassing is the right API for you.
+```
+
+```
+The two styles are fully interoperable as well, so you can mix and match (for example, you can nest one model type in another). You take a symbolic model and use it as a layer in a subclassed model, or the reverse.
+```
+I prefer an easy and flexible style, so I will choose Functional API. And Subclassing can be embedded.
+
+### Data API
+
+#### Data Transform (Feature column vs TFT vs Keras Preprocessing Layer)
+
+
 # A quick demo
 
 ## 1. To define your problem by code
