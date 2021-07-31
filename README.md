@@ -31,9 +31,30 @@ The two styles are fully interoperable as well, so you can mix and match (for ex
 ```
 I prefer an easy and flexible style, so I will choose Functional API. And Subclassing can be embedded.
 
-### Data API
 
-#### Data Transform (Feature column vs TFT vs Keras Preprocessing Layer)
+#### Data Transform (Feature column vs TFT)
+In the future, I will use TFT, Tensorflow Transform.
+
+```
+It is helpful to differentiate between instance-level transformations that can be part of the modeldirectly (where the only drawback is applying them on each training iteration) and dataset-leveltransformations, where we need a full pass to compute overall statistics or the vocabulary of acategorical variable. Such dataset-level transformations cannot be part of the model and have tobe applied as a scalable preprocessing step, which produces the Transform, capturing the logicand the artifacts (mean, variance, vocabulary, and so on) to be attached to the model. Fordataset-level transformations, use tf.transform.
+```
+
+```
+The tf.transform library (which is part of TensorFlow Extended)provides an efficient way of carrying out transformations over apreprocessing pass through the data and saving the resulting features andtransformation artifacts so that the transformations can be applied byTensorFlow Serving during prediction time.
+```
+
+
+### Data API
+Pandas is easy, but not suitable for big dataset.
+
+I will use ExampleGen, a TFX Pipeline component, to ingest data.
+
+```
+The ExampleGen TFX Pipeline component ingests data into TFX pipelines. It consumes external files/services to generate Examples which will be read by other TFX components. It also provides consistent and configurable partition, and shuffles the dataset for ML best practice.
+
+Consumes: Data from external data sources such as CSV, TFRecord, Avro, Parquet and BigQuery.
+Emits: tf.Example records, tf.SequenceExample records, or proto format, depending on the payload format.
+```
 
 
 # A quick demo
