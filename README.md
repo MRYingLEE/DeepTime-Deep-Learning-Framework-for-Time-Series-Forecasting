@@ -22,12 +22,15 @@ https://blog.tensorflow.org/2019/01/what-are-symbolic-and-imperative-apis.html).
 
 ```
 TensorFlow 2.0 supports both of these styles out of the box, so you can choose the right level of abstraction (and complexity) for your project.
-If your goal is ease of use, low conceptual overhead, and you like to think about your models as graphs of layers: use the Keras Sequential or Functional API (like plugging together LEGO bricks) and the built-in training loop. This is the right way to go for most problems.
-If you like to think about your models as an object-oriented Python/Numpy developer, and you prioritize flexibility and hackability, Keras Subclassing is the right API for you.
+If your goal is ease of use, low conceptual overhead, and you like to think about your models as graphs of layers: use the Keras Sequential 
+or Functional API (like plugging together LEGO bricks) and the built-in training loop. This is the right way to go for most problems.
+If you like to think about your models as an object-oriented Python/Numpy developer, and you prioritize flexibility and hackability, 
+Keras Subclassing is the right API for you.
 ```
 
 ```
-The two styles are fully interoperable as well, so you can mix and match (for example, you can nest one model type in another). You take a symbolic model and use it as a layer in a subclassed model, or the reverse.
+The two styles are fully interoperable as well, so you can mix and match (for example, you can nest one model type in another). 
+You take a symbolic model and use it as a layer in a subclassed model, or the reverse.
 ```
 I prefer an easy and flexible style, so I will choose Functional API. And Subclassing can be embedded.
 
@@ -36,11 +39,18 @@ I prefer an easy and flexible style, so I will choose Functional API. And Subcla
 In the future, I will use TFT, Tensorflow Transform.
 
 ```
-It is helpful to differentiate between instance-level transformations that can be part of the modeldirectly (where the only drawback is applying them on each training iteration) and dataset-leveltransformations, where we need a full pass to compute overall statistics or the vocabulary of acategorical variable. Such dataset-level transformations cannot be part of the model and have tobe applied as a scalable preprocessing step, which produces the Transform, capturing the logicand the artifacts (mean, variance, vocabulary, and so on) to be attached to the model. Fordataset-level transformations, use tf.transform.
+It is helpful to differentiate between instance-level transformations that can be part of the modeldirectly 
+(where the only drawback is applying them on each training iteration) and dataset-leveltransformations, 
+where we need a full pass to compute overall statistics or the vocabulary of acategorical variable. 
+Such dataset-level transformations cannot be part of the model and have tobe applied as a scalable preprocessing step, 
+which produces the Transform, capturing the logicand the artifacts (mean, variance, vocabulary, and so on)
+to be attached to the model. Fordataset-level transformations, use tf.transform.
 ```
 
 ```
-The tf.transform library (which is part of TensorFlow Extended)provides an efficient way of carrying out transformations over apreprocessing pass through the data and saving the resulting features andtransformation artifacts so that the transformations can be applied byTensorFlow Serving during prediction time.
+The tf.transform library (which is part of TensorFlow Extended)provides an efficient way of carrying out transformations 
+over apreprocessing pass through the data and saving the resulting features andtransformation artifacts so that the transformations 
+can be applied byTensorFlow Serving during prediction time.
 ```
 
 
@@ -50,7 +60,9 @@ Pandas is easy, but not suitable for big dataset.
 I will use ExampleGen, a TFX Pipeline component, to ingest data.
 
 ```
-The ExampleGen TFX Pipeline component ingests data into TFX pipelines. It consumes external files/services to generate Examples which will be read by other TFX components. It also provides consistent and configurable partition, and shuffles the dataset for ML best practice.
+The ExampleGen TFX Pipeline component ingests data into TFX pipelines. It consumes external files/services to generate Examples 
+which will be read by other TFX components. It also provides consistent and configurable partition, 
+and shuffles the dataset for ML best practice.
 
 Consumes: Data from external data sources such as CSV, TFRecord, Avro, Parquet and BigQuery.
 Emits: tf.Example records, tf.SequenceExample records, or proto format, depending on the payload format.
