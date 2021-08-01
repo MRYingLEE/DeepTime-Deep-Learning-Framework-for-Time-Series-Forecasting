@@ -1,12 +1,16 @@
 # DeepTime-Deep-Learning-Framework-for-Time-Series-Forecasting
 This is an INTERACTIVE deep learning framework for time series forecasting. It uses Tensorflow 2+tf.karas.
 
-# Roadmap <July 2021>
+# Roadmap <August 2021>
 More than 1 year passed. I plan to upgrade the deeptime greatly. 
+
 ## TFX (Tensorflow Extended) will be used, besides Tensorflow
 
 ## More advanced model will be supported
 So far, the model of Informer, a variant of Transformer, is my preference.
+
+## Time Series specific datetime embedding will be supported
+Datetime embedding is very specific to time series data. Time2Vec (https://github.com/ojus1/Time2Vec-PyTorch) will be the prefered embedding method.
 
 ## Some critical choice for the next version
 
@@ -20,12 +24,16 @@ I will continue to use Keras as an extension of Tensorflow.
 There is a good comparion, What are Symbolic and Imperative APIs in TensorFlow 2.0? (
 https://blog.tensorflow.org/2019/01/what-are-symbolic-and-imperative-apis.html).
 
+The following is digested from the book of "Machine Learning Design Patterns: Solutions to Common Challenges in Data Preparation, Model Building, and MLOps".(https://www.amazon.com/Machine-Learning-Design-Patterns-Preparation/dp/1098115783/ref=sr_1_8?crid=7WCGGZGRVFM2&dchild=1&keywords=Machine+Learning&qid=1627808217&sprefix=math+data+s%2Caps%2C377&sr=8-8)
+
 ```
-TensorFlow 2.0 supports both of these styles out of the box, so you can choose the right level of abstraction (and complexity) for your project.
-If your goal is ease of use, low conceptual overhead, and you like to think about your models as graphs of layers: use the Keras Sequential 
-or Functional API (like plugging together LEGO bricks) and the built-in training loop. This is the right way to go for most problems.
-If you like to think about your models as an object-oriented Python/Numpy developer, and you prioritize flexibility and hackability, 
-Keras Subclassing is the right API for you.
+TensorFlow 2.0 supports both of these styles out of the box, so you can choose the right level of abstraction
+(and complexity) for your project.
+If your goal is ease of use, low conceptual overhead, and you like to think about your models as graphs of layers:
+use the Keras Sequential or Functional API (like plugging together LEGO bricks) and the built-in training loop. 
+This is the right way to go for most problems.
+If you like to think about your models as an object-oriented Python/Numpy developer, and you prioritize flexibility
+and hackability, Keras Subclassing is the right API for you.
 ```
 
 ```
@@ -35,7 +43,7 @@ You take a symbolic model and use it as a layer in a subclassed model, or the re
 I prefer an easy and flexible style, so I will choose Functional API. And Subclassing can be embedded.
 
 
-#### Data Transform (Feature column vs TFT)
+#### Data Transform (Feature column vs TFT vs Keras Preprocessing)
 In the future, I will use TFT, Tensorflow Transform.
 
 ```
@@ -49,10 +57,13 @@ to be attached to the model. Fordataset-level transformations, use tf.transform.
 
 ```
 The tf.transform library (which is part of TensorFlow Extended)provides an efficient way of carrying out transformations 
-over apreprocessing pass through the data and saving the resulting features andtransformation artifacts so that the transformations 
-can be applied byTensorFlow Serving during prediction time.
+over apreprocessing pass through the data and saving the resulting features andtransformation artifacts so that the 
+transformations can be applied byTensorFlow Serving during prediction time.
 ```
 
+Is tensorflow.keras.layers.experimental.preprocessing a good solution for transform? This question has puzzled me for some time. Finally I realized that it is not a efficient way to do preprocessing this way for the transform will be done for every epoch. 
+
+So in short, TFT is an efficient tranform library at a cost of complication, especially when Apache Beam is involved.
 
 ### Data API
 Pandas is easy, but not suitable for big dataset.
@@ -60,14 +71,15 @@ Pandas is easy, but not suitable for big dataset.
 I will use ExampleGen, a TFX Pipeline component, to ingest data.
 
 ```
-The ExampleGen TFX Pipeline component ingests data into TFX pipelines. It consumes external files/services to generate Examples 
-which will be read by other TFX components. It also provides consistent and configurable partition, 
-and shuffles the dataset for ML best practice.
+The ExampleGen TFX Pipeline component ingests data into TFX pipelines. It consumes external files/services to 
+generate Examples which will be read by other TFX components. It also provides consistent and configurable 
+partition, and shuffles the dataset for ML best practice.
 
 Consumes: Data from external data sources such as CSV, TFRecord, Avro, Parquet and BigQuery.
 Emits: tf.Example records, tf.SequenceExample records, or proto format, depending on the payload format.
 ```
 
+In conclusion, I will use TFX as the underlying platform and Informer as the default model.
 
 # A quick demo
 
