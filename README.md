@@ -37,7 +37,8 @@ and hackability, Keras Subclassing is the right API for you.
 ```
 
 ```
-The two styles are fully interoperable as well, so you can mix and match (for example, you can nest one model type in another). 
+The two styles are fully interoperable as well, so you can mix and match (for example, you can nest one model type
+in another). 
 You take a symbolic model and use it as a layer in a subclassed model, or the reverse.
 ```
 I prefer an easy and flexible style, so I will choose Functional API. And Subclassing can be embedded.
@@ -56,9 +57,9 @@ to be attached to the model. Fordataset-level transformations, use tf.transform.
 ```
 
 ```
-The tf.transform library (which is part of TensorFlow Extended)provides an efficient way of carrying out transformations 
-over apreprocessing pass through the data and saving the resulting features andtransformation artifacts so that the 
-transformations can be applied byTensorFlow Serving during prediction time.
+The tf.transform library (which is part of TensorFlow Extended)provides an efficient way of carrying out 
+transformations over apreprocessing pass through the data and saving the resulting features andtransformation 
+artifacts so that the transformations can be applied byTensorFlow Serving during prediction time.
 ```
 
 Is tensorflow.keras.layers.experimental.preprocessing a good solution for transform? This question has puzzled me for some time. Finally I realized that it is not a efficient way to do preprocessing this way for the transform will be done for every epoch. 
